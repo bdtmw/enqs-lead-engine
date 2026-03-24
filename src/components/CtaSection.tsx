@@ -1,14 +1,17 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const CtaSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   const scrollToForm = () => {
     document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="py-24 bg-primary">
-      <div className="container mx-auto px-6 max-w-3xl text-center">
+    <section className="py-24 bg-primary" ref={ref}>
+      <div className={`container mx-auto px-6 max-w-3xl text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">
           Ready to Grow Your Business?
         </h2>
