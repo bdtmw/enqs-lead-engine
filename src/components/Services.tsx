@@ -1,4 +1,5 @@
 import { Globe, BarChart3, Megaphone, Code } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const services = [
   {
@@ -24,9 +25,11 @@ const services = [
 ];
 
 const Services = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section id="services" className="py-24 bg-background">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="services" className="py-24 bg-background" ref={ref}>
+      <div className={`container mx-auto px-6 max-w-6xl transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="text-center mb-16">
           <p className="text-secondary font-heading font-semibold text-sm tracking-widest uppercase mb-3">
             What We Do
@@ -37,13 +40,14 @@ const Services = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {services.map((service) => (
+          {services.map((service, i) => (
             <div
               key={service.title}
-              className="group p-8 rounded-2xl border border-border bg-card hover:border-secondary/30 transition-colors duration-300"
+              className={`group p-8 rounded-2xl border border-border bg-card hover:border-secondary/30 hover:shadow-lg transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+              style={{ transitionDelay: isVisible ? `${i * 100}ms` : "0ms" }}
             >
-              <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-5 group-hover:bg-secondary/20 transition-colors">
-                <service.icon className="h-6 w-6 text-secondary" />
+              <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-5 group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
+                <service.icon className="h-6 w-6 text-secondary group-hover:text-secondary-foreground" />
               </div>
               <h3 className="text-xl font-heading font-semibold text-card-foreground mb-2">
                 {service.title}

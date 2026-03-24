@@ -1,3 +1,5 @@
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 const steps = [
   {
     number: "01",
@@ -17,9 +19,11 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-6 max-w-5xl">
+    <section id="how-it-works" className="py-24 bg-background" ref={ref}>
+      <div className={`container mx-auto px-6 max-w-5xl transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="text-center mb-16">
           <p className="text-secondary font-heading font-semibold text-sm tracking-widest uppercase mb-3">
             Simple Process
@@ -30,8 +34,12 @@ const HowItWorks = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {steps.map((step) => (
-            <div key={step.number} className="text-center">
+          {steps.map((step, i) => (
+            <div
+              key={step.number}
+              className={`text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+              style={{ transitionDelay: isVisible ? `${i * 150}ms` : "0ms" }}
+            >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-secondary/10 text-secondary font-heading font-bold text-xl mb-5">
                 {step.number}
               </div>
