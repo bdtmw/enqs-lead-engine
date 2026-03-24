@@ -1,5 +1,6 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   const scrollToForm = () => {
@@ -12,8 +13,16 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-primary">
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary/20" />
+      {/* Background image */}
+      <img
+        src={heroBg}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+        width={1920}
+        height={1080}
+      />
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary" />
 
       <div className="relative z-10 container mx-auto px-6 py-24 text-center max-w-4xl">
         <p className="text-secondary font-heading font-semibold text-sm tracking-widest uppercase mb-6 animate-fade-in">
@@ -40,10 +49,10 @@ const Hero = () => {
           </Button>
           <Button
             onClick={scrollToServices}
-            variant="outline"
             size="lg"
-            className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 font-heading font-medium text-base px-8 py-6 rounded-lg"
+            className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-heading font-semibold text-base px-8 py-6 rounded-lg"
           >
+            <Eye className="mr-2 h-5 w-5" />
             View Services
           </Button>
         </div>
